@@ -6,7 +6,6 @@
   <value name="version">1.0</value>
   <record name="startup_services" javaclass="com.wm.util.Values">
     <null name="HG_PayloadVault.v1.config:loadConfig"/>
-    <null name="HG_PayloadVault.v1.UI.solution:createSolution"/>
   </record>
   <null name="shutdown_services"/>
   <null name="replication_services"/>
