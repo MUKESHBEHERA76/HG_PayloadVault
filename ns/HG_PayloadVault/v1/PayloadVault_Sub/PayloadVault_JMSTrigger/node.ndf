@@ -49,7 +49,7 @@
     </array>
     <array name="destinations" type="record" depth="1">
       <record javaclass="com.wm.util.Values">
-        <value name="destination">Q_PAYLOAD_VAULT</value>
+        <value name="destination">QUEUE.PAYLOAD_VAULT</value>
         <value name="messageSelector"></value>
         <number name="destinationType" type="Integer">0</number>
       </record>
