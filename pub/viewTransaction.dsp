@@ -4,84 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payload Vault</title>
-    <link rel="stylesheet" href="css\stylesheet.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <img src="image\harmonigate.png" alt="Harmonigate.com">
-        <h1>Payload Vault</h1>
-    </header>
-    <div class="table-container">
-        <table>
+<body class="bg-gray-100 p-6">    
+    <div class="mt-6 bg-white p-4 rounded-lg shadow-lg overflow-x-auto">
+        <table class="w-full border-collapse border border-gray-300">
             <thead>
-                <tr>
-                    <th>Document Id</th>
-                    <th>Interface Id</th>
-                    <th>Source</th>
-                    <th>Target</th>
-                    <th>Interface Name</th>
-                    <th>Tracking Id</th>
-                    <th>Document Type</th>
-                    <th>Document Name</th>
-                    <th>Inserted date</th>
-                    <th>Transaction Id</th>
-                    <th>Identifier 1</th>
-                    <th>Identifier 2</th>
-                    <th>Identifier 3</th>
-                    <th>Identifier 4</th>
-                    <th>Payload</th>
+                <tr class="bg-blue-100 text-gray-700">
+                    <th class="p-3 border">Document Id</th>
+                    <th class="p-3 border">Tracking Id</th>
+                    <th class="p-3 border">Document Type</th>
+                    <th class="p-3 border">Document Name</th>
+                    <th class="p-3 border">Inserted Date</th>
+                    <th class="p-3 border">Transaction Id</th>
+                    <th class="p-3 border">Identifier 1</th>
+                    <th class="p-3 border">Identifier 2</th>
+                    <th class="p-3 border">Identifier 3</th>
+                    <th class="p-3 border">Identifier 4</th>
+                    <th class="p-3 border">Payload</th>
                 </tr>
             </thead>
             %invoke HG_PayloadVault.v1.UI:getTransactions%
             <tbody>
                 %loop viewTransactionsOutput/results%
-                <tr>
-                    <td>%value DOCUMENTID%</td>
-                    <td>%value INTERFACE_ID%</td>
-                    <td>%value SOURCE%</td>
-                    <td>%value TARGET%</td>
-                    <td>%value INTERFACE_NAME%</td>
-                    <td>%value TRACKING_ID%</td>
-                    <td>%value DOCUMENT_TYPE%</td>
-                    <td>%value DOCUMENT_NAME%</td>
-                    <td>%value INSERTED_DATE%</td>
-                    <td>%value TRANSACTION_ID%</td>
-                    <td>%value IDENTIFIER1%</td>
-                    <td>%value IDENTIFIER2%</td>
-                    <td>%value IDENTIFIER3%</td>
-                    <td>%value IDENTIFIER4%</td>
-                    <td><a href="" class="capture-payload">View</a></td>
+                <tr class="odd:bg-gray-50 even:bg-white hover:bg-gray-100 border-b">
+                    <td class="p-3 border">%value DOCUMENTID%</td>
+                    <td class="p-3 border">%value TRACKING_ID%</td>
+                    <td class="p-3 border">%value DOCUMENT_TYPE%</td>
+                    <td class="p-3 border">%value DOCUMENT_NAME%</td>
+                    <td class="p-3 border">%value INSERTED_DATE%</td>
+                    <td class="p-3 border">%value TRANSACTION_ID%</td>
+                    <td class="p-3 border">%value IDENTIFIER1%</td>
+                    <td class="p-3 border">%value IDENTIFIER2%</td>
+                    <td class="p-3 border">%value IDENTIFIER3%</td>
+                    <td class="p-3 border">%value IDENTIFIER4%</td>
+                    <td class="p-3 border text-center">
+                        <a href="#" class="text-blue-500 hover:text-blue-700 capture-payload">View</a>
+                    </td>
                 </tr>
                 %endloop%
-                <!-- Add more rows as needed -->
             </tbody>
             %onerror%
-                <HR>
-                <P>
-                    <FONT COLOR="#FF0000">%value errorMessage%</FONT>
-                </P>
+            <tfoot>
+                <tr>
+                    <td colspan="15" class="text-center text-red-500 p-3">%value errorMessage%</td>
+                </tr>
+            </tfoot>
             %endinvoke%
         </table>
     </div>
-</body>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-    // Get all anchor tags with class 'capture-row-data'
-    var editLinks = document.querySelectorAll('.capture-payload');
 
-    // Attach click event listeners to each anchor tag
-    editLinks.forEach(function (link) {
-        link.addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent the default behavior of the anchor tag
-
-            // Traverse up the DOM to find the parent 'tr' element (table row)
-            var row = event.target.closest('tr');
-
-            var url = "viewPayload.dsp?DOCUMENTID=" + row.cells[0].innerText;
-            console.log(url);
-            window.open(url, "_blank");
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.capture-payload').forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    let row = event.target.closest('tr');
+                    let url = "viewPayload.dsp?DOCUMENTID=" + row.cells[0].innerText;
+                    window.open(url, "_blank");
+                });
+            });
         });
-    });
-});
-</script>
+    </script>
+</body>
 </html>
